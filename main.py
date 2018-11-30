@@ -38,6 +38,7 @@ class Patient(object):
     def __repr__(self):
         return "Patent Age: " + self.age + " Num: " + self.num
 
+
 if __name__ == '__main__':
     with open('processed.cleveland.data') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
