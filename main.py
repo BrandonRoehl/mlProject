@@ -9,7 +9,15 @@ if __name__ == '__main__':
     print(patients.dtypes)
     # TODO maybe don't use the values
     # patients = patients.drop(axis=1)
-    # patients = patients.apply(lambda x: x.fillna(0))
+    patients = patients.apply(lambda x: x.fillna(0))
+    colT = ColumnTransformer(
+        [("dummy_col", OneHotEncoder(categories=[[0, 1],
+                                                 [1, 2,3,4],
+                                                 [0,1,2],
+                                                 [1,2,3],
+                                                 [0,1,2,3,4]]), [1, 2, 6, 10, 13]),
+         ("norm", Normalizer(norm='l1'), [0,3,4,5,7,8,9,11])])
 
-
-# 2, 6, 10, 13
+    patients = colT.fit_transform(patients)
+    print(patients)
+# 1 2, 6, 10, 13
