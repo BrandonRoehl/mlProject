@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="25bb072c-8bfa-470e-8d1c-5a4ac7aa702d" name="Default Changelist" comment="janky spanky way to normalize the dataset,">
-      <change beforePath="$PROJECT_DIR$/.idea/mlProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mlProject.iml" afterDir="false" />
+    <list default="true" id="25bb072c-8bfa-470e-8d1c-5a4ac7aa702d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cleveland.data" beforeDir="false" afterPath="$PROJECT_DIR$/cleveland.data" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/processed.cleveland.data" beforeDir="false" afterPath="$PROJECT_DIR$/processed.cleveland.data" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,7 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/mlProject$main.coverage" NAME="main Coverage Results" MODIFIED="1544149673122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/mlProject$main.coverage" NAME="main Coverage Results" MODIFIED="1544153607595" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="2138664157">
@@ -63,14 +62,15 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="796" />
-          <entry key="txt" value="140" />
+          <entry key="data" value="5" />
+          <entry key="py" value="1457" />
+          <entry key="txt" value="169" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="140" />
-          <entry key="Python" value="796" />
+          <entry key="PLAIN_TEXT" value="174" />
+          <entry key="Python" value="1457" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -90,8 +90,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="224" selection-start-line="5" selection-start-column="224" selection-end-line="5" selection-end-column="224" />
+            <state relative-caret-position="135">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -102,8 +102,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cleveland.data">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4230">
-              <caret line="282" selection-start-line="282" selection-end-line="282" />
+            <state relative-caret-position="4245">
+              <caret line="283" selection-start-line="283" selection-end-line="283" />
             </state>
           </provider>
         </entry>
@@ -111,8 +111,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/processed.cleveland.data">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="60" selection-start-line="12" selection-start-column="60" selection-end-line="12" selection-end-column="60" />
+            <state relative-caret-position="4245">
+              <caret line="283" selection-start-line="283" selection-end-line="283" />
             </state>
           </provider>
         </entry>
@@ -126,6 +126,20 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>name</find>
+      <find>^,</find>
+      <find>\S</find>
+      <find>^.*,</find>
+      <find>,</find>
+      <find>^.*?,</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>name\n</replace>
+      <replace>,</replace>
+    </replaceStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -133,6 +147,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/cleveland.data" />
+        <option value="$PROJECT_DIR$/processed.cleveland.data" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
@@ -143,7 +158,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="4">
     <option name="x" value="993" />
     <option name="y" value="25" />
     <option name="width" value="927" />
@@ -277,14 +292,28 @@
       <option name="project" value="LOCAL" />
       <updated>1544148977929</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="janky spanky way to normalize the dataset 🎥🎥🎥">
+      <created>1544149790485</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1544149790485</updated>
+    </task>
+    <task id="LOCAL-00005" summary="NON JANKY SPANKY thx medHIUM">
+      <created>1544152454148</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1544152454148</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
+    <frame x="993" y="25" width="927" height="1055" extended-state="4" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13115661" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26901248" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
@@ -329,7 +358,9 @@
     <MESSAGE value="Patients is a numpy array" />
     <MESSAGE value="removed already commited files that are ignored" />
     <MESSAGE value="janky spanky honky tonky" />
-    <option name="LAST_COMMIT_MESSAGE" value="janky spanky honky tonky" />
+    <MESSAGE value="janky spanky way to normalize the dataset " />
+    <MESSAGE value="NON JANKY SPANKY thx medHIUM" />
+    <option name="LAST_COMMIT_MESSAGE" value="NON JANKY SPANKY thx medHIUM" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/process.rb" />
@@ -340,24 +371,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/processed.cleveland.data">
+    <entry file="file://$PROJECT_DIR$/cleveland.data">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="60" selection-start-line="12" selection-start-column="60" selection-end-line="12" selection-end-column="60" />
+        <state relative-caret-position="4245">
+          <caret line="283" selection-start-line="283" selection-end-line="283" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cleveland.data">
+    <entry file="file://$PROJECT_DIR$/processed.cleveland.data">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4230">
-          <caret line="282" selection-start-line="282" selection-end-line="282" />
+        <state relative-caret-position="4245">
+          <caret line="283" selection-start-line="283" selection-end-line="283" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="224" selection-start-line="5" selection-start-column="224" selection-end-line="5" selection-end-column="224" />
+        <state relative-caret-position="135">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
