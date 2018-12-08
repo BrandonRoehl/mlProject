@@ -20,11 +20,10 @@ if __name__ == '__main__':
     print(patients.shape)
     print(patients.dtypes)
 
-    column_length = len(patients.columns) - 1
-    x = patients.columns[:column_length]
-    y = patients.columns[column_length:]
+    y = patients.take([13], axis=1)
+    patients = patients.drop(['thal'], axis=1)
 
-    x_train, x_test, y_train, y_test = train_test_split(patients[x], patients[y], random_state=0)
+
 
     colT = ColumnTransformer(
         [("onehot", OneHotEncoder(categories=[[0, 1],
@@ -33,8 +32,8 @@ if __name__ == '__main__':
                                               [1, 2, 3]]), [1, 2, 6, 10]),
          ("norm", Normalizer(norm='l1'), [0, 3, 4, 5, 7, 8, 9, 11])])
 
-    x_train = colT.fit_transform(x_train)
-    x_test = colT.fit_transform(x_test)
+    patients = colT.fit_transform(patients)
+    x_train, x_test, y_train, y_test = train_test_split(patients, y, random_state=0)
 
     learning_rate = .001
     training_epochs = 1000
