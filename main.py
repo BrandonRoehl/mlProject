@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 import tensorflow as tf
 from tensorflow.keras import layers
 import pandas as pd
+import numpy as np
 from tensorflow.keras.utils import to_categorical
 
 if __name__ == '__main__':
@@ -29,24 +30,17 @@ if __name__ == '__main__':
     x_train = colT.fit_transform(x_train)
     x_test = colT.fit_transform(x_test)
 
-
     learning_rate = .001
     training_epochs = 5
 
     n_input = x_train.shape[1]
-    n_output = 2 #y_train.shape[1]
     n_length = x_train.shape[0]
     n_hidden = 10
     n_hidden2 = 5
 
-    # y_train = y_train.stack
-    # y_test = y_test.stack
     y_train = to_categorical(y_train)
     y_test = to_categorical(y_test)
-
-    # stack = y_train.val
-    # print(stack.shape)
-    # print(stack)
+    n_output = 2
 
     model = tf.keras.Sequential()
     model.add(layers.Dense(n_hidden, activation='sigmoid', input_shape=(n_input,)))
@@ -61,7 +55,3 @@ if __name__ == '__main__':
     print('Loss: ', score[0])
     print('Accuracy: ', score[1])
 
-
-
-    # print(patients.shape)
-# 1 2, 6, 10, 13
