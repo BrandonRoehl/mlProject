@@ -8,7 +8,8 @@ from tensorflow.keras.utils import to_categorical
 
 if __name__ == '__main__':
     patients = pd.read_csv('processed.cleveland.data', dtype='object', header=None, names=[
-        'age','sex','cp','trestbps','chol','fbs','restecg','thalach','exang','oldpeak','depression','exercise','ca','thal'
+        'age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'depression',
+        'exercise', 'ca', 'thal'
     ])
     for x in patients.columns:
         patients = patients[patients[x] != '?']
@@ -27,10 +28,10 @@ if __name__ == '__main__':
 
     colT = ColumnTransformer(
         [("dummy_col", OneHotEncoder(categories=[[0, 1],
-                                                 [1, 2,3,4],
-                                                 [0,1,2],
-                                                 [1,2,3]]), [1, 2, 6, 10]),
-         ("norm", Normalizer(norm='l1'), [0,3,4,5,7,8,9,11])])
+                                                 [1, 2, 3, 4],
+                                                 [0, 1, 2],
+                                                 [1, 2, 3]]), [1, 2, 6, 10]),
+         ("norm", Normalizer(norm='l1'), [0, 3, 4, 5, 7, 8, 9, 11])])
 
     x_train = colT.fit_transform(x_train)
     x_test = colT.fit_transform(x_test)
@@ -62,7 +63,7 @@ if __name__ == '__main__':
     # print('Accuracy: ', score[1])
 
     weights = {
-        "hidden": tf.   Variable(tf.random_normal([n_input, n_hidden]), name="weight_hidden"),
+        "hidden": tf.Variable(tf.random_normal([n_input, n_hidden]), name="weight_hidden"),
         "output": tf.Variable(tf.random_normal([n_hidden, n_output]), name="weight_output")
     }
 
