@@ -46,7 +46,7 @@ if __name__ == '__main__':
 
     y_train = to_categorical(y_train)
     y_test = to_categorical(y_test)
-    n_output = 2
+    n_output = y_train.shape[1]
     #
     # model = tf.keras.Sequential()
     # model.add(layers.Dense(n_hidden, activation='sigmoid', input_shape=(n_input,)))
