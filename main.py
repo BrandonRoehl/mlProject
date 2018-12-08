@@ -36,7 +36,7 @@ if __name__ == '__main__':
     x_train, x_test, y_train, y_test = train_test_split(patients, y, random_state=0)
 
     learning_rate = .001
-    training_epochs = 1000
+    training_epochs = 2000
     display_epochs = 100
 
     n_input = x_train.shape[1]
