@@ -29,25 +29,18 @@ if __name__ == '__main__':
     x_train = colT.fit_transform(x_train)
     x_test = colT.fit_transform(x_test)
 
-
     learning_rate = .001
     training_epochs = 1000
     display_epochs = 100
 
     n_input = x_train.shape[1]
-    n_output = 2 #y_train.shape[1]
     n_length = x_train.shape[0]
     n_hidden = 10
     n_hidden2 = 5
 
-    # y_train = y_train.stack
-    # y_test = y_test.stack
     y_train = to_categorical(y_train)
     y_test = to_categorical(y_test)
-
-    # stack = y_train.val
-    # print(stack.shape)
-    # print(stack)
+    n_output = 2
 
     model = tf.keras.Sequential()
     model.add(layers.Dense(n_hidden, activation='sigmoid', input_shape=(n_input,)))
@@ -61,7 +54,7 @@ if __name__ == '__main__':
     score = model.evaluate(x_test, y_test, verbose=0)
     print('Loss: ', score[0])
     print('Accuracy: ', score[1])
-    #
+
     # weights = {
     #     "hidden": tf.Variable(tf.random_normal([n_input, n_hidden]), name="weight_hidden"),
     #     "output": tf.Variable(tf.random_normal([n_hidden, n_output]), name="weight_output")
