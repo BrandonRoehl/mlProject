@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 import tensorflow as tf
 from tensorflow.keras import layers
 import pandas as pd
+from tensorflow.keras.utils import to_categorical
 
 if __name__ == '__main__':
     patients = pd.read_csv('processed.cleveland.data')
@@ -33,12 +34,19 @@ if __name__ == '__main__':
     training_epochs = 5
 
     n_input = x_train.shape[1]
-    n_output = y_train.shape[1]
+    n_output = 2 #y_train.shape[1]
+    n_length = x_train.shape[0]
     n_hidden = 10
     n_hidden2 = 5
 
-    y_train = y_train.stack()
-    y_test = y_test.stack
+    # y_train = y_train.stack
+    # y_test = y_test.stack
+    y_train = to_categorical(y_train)
+    y_test = to_categorical(y_test)
+
+    # stack = y_train.val
+    # print(stack.shape)
+    # print(stack)
 
     model = tf.keras.Sequential()
     model.add(layers.Dense(n_hidden, activation='sigmoid', input_shape=(n_input,)))
@@ -48,7 +56,7 @@ if __name__ == '__main__':
 
     model.summary()
 
-    model.fit(x_train, y_train, epochs= training_epochs, batch_size=60000, validation_data=(x_test, y_test), verbose=2)
+    model.fit(x_train, y_train, epochs= training_epochs, batch_size=n_length, validation_data=(x_test, y_test), verbose=2)
     score = model.evaluate(x_test, y_test, verbose=0)
     print('Loss: ', score[0])
     print('Accuracy: ', score[1])
