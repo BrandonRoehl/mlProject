@@ -2,16 +2,22 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import Normalizer, OneHotEncoder
 from sklearn.model_selection import train_test_split
 import tensorflow as tf
-from tensorflow.keras import layers
 import pandas as pd
+import numpy as np
 from tensorflow.keras.utils import to_categorical
 
 if __name__ == '__main__':
-    patients = pd.read_csv('processed.cleveland.data')
+    patients = pd.read_csv('processed.cleveland.data', dtype='object', header=None, names=[
+        'age','sex','cp','trestbps','chol','fbs','restecg','thalach','exang','oldpeak','depression','exercise','ca','thal'
+    ])
+    for x in patients.columns:
+        patients = patients[patients[x] != '?']
+        patients = patients[patients[x] != '-9']
+
+    patients = patients.astype(np.float64)
+    patients = patients[patients.thal <= 1]
     print(patients.shape)
     print(patients.dtypes)
-    # TODO maybe don't use the values
-    patients = patients.apply(lambda x: x.fillna(0))
 
     column_length = len(patients.columns) - 1
     x = patients.columns[:column_length]
