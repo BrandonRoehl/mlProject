@@ -7,6 +7,8 @@ import numpy as np
 from tensorflow.keras.utils import to_categorical
 
 if __name__ == '__main__':
+    data_type = 'float'
+
     # Read in the processed data
     patients = pd.read_csv('processed.cleveland.data', dtype='object', header=None, names=[
         'age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'depression',
@@ -17,7 +19,7 @@ if __name__ == '__main__':
         patients = patients[patients[x] != '?']
         patients = patients[patients[x] != '-9']
     # Convert to a float matrix
-    patients = patients.astype(np.float64)
+    patients = patients.astype(data_type)
     # Only train on patients with have or don't
     patients = patients[patients.thal <= 1]
 
@@ -76,8 +78,8 @@ if __name__ == '__main__':
         return output_layer
 
 
-    X = tf.placeholder("float", [None, n_input])
-    Y = tf.placeholder("float", [None, n_output])
+    X = tf.placeholder(data_type, [None, n_input])
+    Y = tf.placeholder(data_type, [None, n_output])
     pred = model(X, weights, bias)
 
     # Define loss and optimizer
@@ -114,8 +116,8 @@ if __name__ == '__main__':
         # print(np.argmax(test_result, 1))
 
         # Calculate the accuracy for each dataset
-        train_accuracy = tf.reduce_mean(tf.cast(correct_pred_train, "float"))
-        test_accuracy = tf.reduce_mean(tf.cast(correct_pred_test, "float"))
+        train_accuracy = tf.reduce_mean(tf.cast(correct_pred_train, data_type))
+        test_accuracy = tf.reduce_mean(tf.cast(correct_pred_test, data_type))
 
         print(sess.run(train_accuracy))
         print(sess.run(test_accuracy))
