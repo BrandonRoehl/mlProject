@@ -3,7 +3,6 @@ from sklearn.preprocessing import Normalizer, OneHotEncoder
 from sklearn.model_selection import train_test_split
 import tensorflow as tf
 import pandas as pd
-import numpy as np
 from tensorflow.keras.utils import to_categorical
 
 if __name__ == '__main__':
@@ -29,8 +28,8 @@ if __name__ == '__main__':
     # => float64
 
     # Split into test and train data
+    x = patients.drop(['thal'], axis=1)
     y = patients.take([13], axis=1)
-    patients = patients.drop(['thal'], axis=1)
 
     # Normalize X data
     colT = ColumnTransformer(
@@ -40,13 +39,13 @@ if __name__ == '__main__':
                                               [1, 2, 3]]), [1, 2, 6, 10]),
          ("norm", Normalizer(norm='l1'), [0, 3, 4, 5, 7, 8, 9, 11])])
 
-    patients = colT.fit_transform(patients)
+    x = colT.fit_transform(x)
 
     # Normalize Y data
     y = to_categorical(y)
 
     # Split the data into train and test data
-    x_train, x_test, y_train, y_test = train_test_split(patients, y, random_state=0)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=0)
 
     # Hyper parameters
     learning_rate = .001
