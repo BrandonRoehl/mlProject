@@ -6,6 +6,11 @@ import pandas as pd
 from tensorflow.keras.utils import to_categorical
 
 if __name__ == '__main__':
+    # Hyper parameters
+    learning_rate = .001
+    training_epochs = 2000
+    display_epochs = 100
+    hidden_nodes = 72
     data_type = 'float'
 
     # Read in the processed data
@@ -47,24 +52,17 @@ if __name__ == '__main__':
     # Split the data into train and test data
     x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=0)
 
-    # Hyper parameters
-    learning_rate = .001
-    training_epochs = 2000
-    display_epochs = 100
-    n_hidden = 72
-
     # Determined parameters
     n_input = x_train.shape[1]
-    n_length = x_train.shape[0]
     n_output = y_train.shape[1]
 
     weights = {
-        "hidden": tf.Variable(tf.random_normal([n_input, n_hidden]), name="weight_hidden"),
-        "output": tf.Variable(tf.random_normal([n_hidden, n_output]), name="weight_output")
+        "hidden": tf.Variable(tf.random_normal([n_input, hidden_nodes]), name="weight_hidden"),
+        "output": tf.Variable(tf.random_normal([hidden_nodes, n_output]), name="weight_output")
     }
 
     bias = {
-        "hidden": tf.Variable(tf.random_normal([n_hidden]), name="bias_hidden"),
+        "hidden": tf.Variable(tf.random_normal([hidden_nodes]), name="bias_hidden"),
         "output": tf.Variable(tf.random_normal([n_output]), name="bias_output")
     }
 
