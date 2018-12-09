@@ -7,24 +7,30 @@ import numpy as np
 from tensorflow.keras.utils import to_categorical
 
 if __name__ == '__main__':
+    # Read in the processed data
     patients = pd.read_csv('processed.cleveland.data', dtype='object', header=None, names=[
         'age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'depression',
         'exercise', 'ca', 'thal'
     ])
+    # Sanitize based on incorrect data
     for x in patients.columns:
         patients = patients[patients[x] != '?']
         patients = patients[patients[x] != '-9']
-
+    # Convert to a float matrix
     patients = patients.astype(np.float64)
+    # Only train on patients with have or don't
     patients = patients[patients.thal <= 1]
-    print(patients.shape)
-    print(patients.dtypes)
 
+    print(patients.shape)
+    # => (212 , 14)
+    print(patients.dtypes)
+    # => float64
+
+    # Split into test and train data
     y = patients.take([13], axis=1)
     patients = patients.drop(['thal'], axis=1)
 
-
-
+    # Normalize X data
     colT = ColumnTransformer(
         [("onehot", OneHotEncoder(categories=[[0, 1],
                                               [1, 2, 3, 4],
@@ -33,18 +39,22 @@ if __name__ == '__main__':
          ("norm", Normalizer(norm='l1'), [0, 3, 4, 5, 7, 8, 9, 11])])
 
     patients = colT.fit_transform(patients)
+
+    # Normalize Y data
+    y = to_categorical(y)
+
+    # Split the data into train and test data
     x_train, x_test, y_train, y_test = train_test_split(patients, y, random_state=0)
 
+    # Hyper parameters
     learning_rate = .001
     training_epochs = 2000
     display_epochs = 100
-
-    n_input = x_train.shape[1]
-    n_length = x_train.shape[0]
     n_hidden = 72
 
-    y_train = to_categorical(y_train)
-    y_test = to_categorical(y_test)
+    # Determined parameters
+    n_input = x_train.shape[1]
+    n_length = x_train.shape[0]
     n_output = y_train.shape[1]
 
     weights = {
@@ -88,13 +98,15 @@ if __name__ == '__main__':
         print("Optimization finished!")
 
         # Get train and test results and compare them to the expected values
-        train_result = sess.run(pred, feed_dict={X: x_train})
 
+        # Train results
+        train_result = sess.run(pred, feed_dict={X: x_train})
+        correct_pred_train = tf.equal(tf.argmax(train_result, 1), tf.argmax(y_train, 1))
+        sess.run(correct_pred_train)
         # print(train_result)
         # print(np.argmax(train_result, 1))
 
-        correct_pred_train = tf.equal(tf.argmax(train_result, 1), tf.argmax(y_train, 1))
-        sess.run(correct_pred_train)
+        # Test results
         test_result = sess.run(pred, feed_dict={X: x_test})
         correct_pred_test = tf.equal(tf.argmax(test_result, 1), tf.argmax(y_test, 1))
         sess.run(correct_pred_test)
@@ -120,6 +132,3 @@ if __name__ == '__main__':
         #     print(var.name, val)
 
         sess.close()
-
-    # print(patients.shape)
-# 1 2, 6, 10, 13
