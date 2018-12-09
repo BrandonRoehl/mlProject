@@ -125,8 +125,8 @@ if __name__ == '__main__':
 
         """"""
         print("")
-        tvars = tf.trainable_variables()
-        tvars_vals = sess.run(tvars)
+        # tvars = tf.trainable_variables()
+        # tvars_vals = sess.run(tvars)
         #
         # for var, val in zip(tvars, tvars_vals):
         #     print(var.name, val)
