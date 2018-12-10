@@ -62,12 +62,8 @@ if __name__ == '__main__':
     n_output = y_train.shape[1]
 
     input_layer = layers.Input(shape=(n_input,))
-    hidden_layers = layers.Dense(hidden_nodes, activation=activations.sigmoid)(input_layer)
-    # hidden_layers = layers.Dropout(0.2)(hidden_layers)
-    hidden_layers = layers.Dense(hidden_nodes, activation=activations.relu)(hidden_layers)
-    # hidden_layers = layers.Dropout(0.5)(hidden_layers)
-    hidden_layers = layers.Flatten()(hidden_layers)
-    output_layer = layers.Dense(n_output, activation=activations.softmax)(hidden_layers)
+    hidden_layers = layers.Dense(hidden_nodes, activation=activations.elu)(input_layer)
+    output_layer = layers.Dense(n_output)(hidden_layers)
 
     model = Model(input_layer, output_layer)
 
