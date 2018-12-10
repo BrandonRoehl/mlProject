@@ -66,14 +66,12 @@ if __name__ == '__main__':
         "output": tf.Variable(tf.random_normal([n_output]), name="bias_output")
     }
 
+    def model(input_layer, weights, bias):
+        hidden_layers = tf.add(tf.matmul(input_layer, weights["hidden"]), bias["hidden"])
+        hidden_layers = tf.nn.leaky_relu(hidden_layers)
 
-    def model(x, weights, bias):
-        layer_1 = tf.add(tf.matmul(x, weights["hidden"]), bias["hidden"])
-        layer_1 = tf.nn.relu(layer_1)
-
-        output_layer = tf.matmul(layer_1, weights["output"]) + bias["output"]
+        output_layer = tf.matmul(hidden_layers, weights["output"]) + bias["output"]
         return output_layer
-
 
     X = tf.placeholder(data_type, [None, n_input])
     Y = tf.placeholder(data_type, [None, n_output])
