@@ -10,7 +10,7 @@ if __name__ == '__main__':
     learning_rate = .001
     training_epochs = 5000
     display_epochs = 100
-    hidden_nodes = 10
+    hidden_nodes = 20
     data_type = 'float'
 
     # Read in the processed data
