@@ -5,6 +5,8 @@ import tensorflow as tf
 import pandas as pd
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras import layers
+from tensorflow.keras import Model
+
 
 if __name__ == '__main__':
     # Hyper parameters
@@ -13,6 +15,7 @@ if __name__ == '__main__':
     display_epochs = 100
     hidden_nodes = 72
     data_type = 'float'
+
 
     # Read in the processed data
     patients = pd.read_csv('processed.cleveland.data', dtype='object', header=None, names=[
@@ -57,12 +60,22 @@ if __name__ == '__main__':
     n_input = x_train.shape[1]
     n_output = y_train.shape[1]
 
-    model = tf.keras.Sequential()
-    model.add(layers.Dense(hidden_nodes, activation=tf.keras.activations.sigmoid, input_shape=(n_input,)))
-    model.add(layers.Dropout(0.2))
-    model.add(layers.Dense(hidden_nodes, activation=tf.keras.activations.relu))
-    model.add(layers.Dropout(0.5))
-    model.add(layers.Dense(n_output, activation=tf.keras.activations.softmax))
+    input_layer = layers.Input(shape=(n_input,))
+    hidden_layers = layers.Dense(hidden_nodes, activation='sigmoid')(input_layer)
+    hidden_layers = layers.Dropout(0.2)(hidden_layers)
+    hidden_layers = layers.Dense(hidden_nodes, activation='relu')(hidden_layers)
+    hidden_layers = layers.Dropout(0.5)(hidden_layers)
+    output_layer = layers.Dense(n_output, activation='softmax')(hidden_layers)
+
+    model = Model(input_layer,output_layer)
+
+
+    # model = tf.keras.Sequential()
+    # model.add(layers.Dense(hidden_nodes, activation=tf.keras.activations.sigmoid, input_shape=(n_input,)))
+    # model.add(layers.Dropout(0.2))
+    # model.add(layers.Dense(hidden_nodes, activation=tf.keras.activations.relu))
+    # model.add(layers.Dropout(0.5))
+    # model.add(layers.Dense(n_output, activation=tf.keras.activations.softmax))
 
     model.compile(optimizer=tf.train.AdamOptimizer(learning_rate), loss=tf.keras.losses.binary_crossentropy,
                   metrics=['accuracy'])
