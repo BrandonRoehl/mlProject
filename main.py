@@ -14,7 +14,6 @@ if __name__ == '__main__':
     learning_rate = .001
     training_epochs = 2000
     display_epochs = 100
-    hidden_nodes = 72
     batch_size = 10000
     data_type = 'float'
 
@@ -62,7 +61,7 @@ if __name__ == '__main__':
     n_output = y_train.shape[1]
 
     input_layer = layers.Input(shape=(n_input,))
-    hidden_layers = layers.Dense(hidden_nodes, activation=activations.elu)(input_layer)
+    hidden_layers = layers.Dense(72, activation=activations.elu)(input_layer)
     output_layer = layers.Dense(n_output)(hidden_layers)
 
     model = Model(input_layer, output_layer)
