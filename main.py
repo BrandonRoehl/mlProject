@@ -71,13 +71,6 @@ if __name__ == '__main__':
         layer_1 = tf.add(tf.matmul(x, weights["hidden"]), bias["hidden"])
         layer_1 = tf.nn.relu(layer_1)
 
-        layer_1 = tf.nn.dropout(layer_1,0.5)
-
-        layer_1 = tf.add(tf.matmul(layer_1, weights["hidden2"]), bias["hidden2"])
-        layer_1 = tf.nn.sigmoid(layer_1)
-        layer_1 = tf.nn.dropout(layer_1,0.2)
-
-
         output_layer = tf.matmul(layer_1, weights["output"]) + bias["output"]
         return output_layer
 
