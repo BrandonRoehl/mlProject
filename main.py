@@ -12,9 +12,9 @@ from tensorflow.keras import activations
 if __name__ == '__main__':
     # Hyper parameters
     learning_rate = .001
-    training_epochs = 2000
+    training_epochs = 3000
     display_epochs = 100
-    batch_size = 10000
+    batch_size = 100
     data_type = 'float'
 
     # Read in the processed data
@@ -62,11 +62,11 @@ if __name__ == '__main__':
 
     input_layer = layers.Input(shape=(n_input,))
     hidden_layers = layers.Dense(72, activation=activations.elu)(input_layer)
-    output_layer = layers.Dense(n_output)(hidden_layers)
+    output_layer = layers.Dense(n_output, activation=activations.sigmoid)(hidden_layers)
 
     model = Model(input_layer, output_layer)
 
-    model.compile(optimizer=tf.train.AdamOptimizer(learning_rate), loss=tf.keras.losses.binary_crossentropy, metrics=['accuracy'])
+    model.compile(optimizer=tf.keras.optimizers.RMSprop(lr=learning_rate, decay=0.0002), loss=tf.keras.losses.binary_crossentropy, metrics=['accuracy'])
 
     model.summary()
 
