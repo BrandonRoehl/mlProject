@@ -58,11 +58,15 @@ if __name__ == '__main__':
 
     weights = {
         "hidden": tf.Variable(tf.random_normal([n_input, hidden_nodes]), name="weight_hidden"),
+        "hidden2": tf.Variable(tf.random_normal([hidden_nodes, hidden_nodes]), name="weight_hidden2"),
+        "hidden3": tf.Variable(tf.random_normal([hidden_nodes, hidden_nodes]), name="weight_hidden3"),
         "output": tf.Variable(tf.random_normal([hidden_nodes, n_output]), name="weight_output")
     }
 
     bias = {
         "hidden": tf.Variable(tf.random_normal([hidden_nodes]), name="bias_hidden"),
+        "hidden2": tf.Variable(tf.random_normal([hidden_nodes]), name="bias_hidden2"),
+        "hidden3": tf.Variable(tf.random_normal([hidden_nodes]), name="bias_hidden3"),
         "output": tf.Variable(tf.random_normal([n_output]), name="bias_output")
     }
 
@@ -70,6 +74,13 @@ if __name__ == '__main__':
     def model(x, weights, bias):
         layer_1 = tf.add(tf.matmul(x, weights["hidden"]), bias["hidden"])
         layer_1 = tf.nn.relu(layer_1)
+
+        layer_1 = tf.nn.dropout(layer_1,0.5)
+
+        layer_1 = tf.add(tf.matmul(layer_1, weights["hidden2"]), bias["hidden2"])
+        layer_1 = tf.nn.sigmoid(layer_1)
+        layer_1 = tf.nn.dropout(layer_1,0.2)
+
 
         output_layer = tf.matmul(layer_1, weights["output"]) + bias["output"]
         return output_layer
@@ -80,7 +91,8 @@ if __name__ == '__main__':
     pred = model(X, weights, bias)
 
     # Define loss and optimizer
-    cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=pred, labels=Y))
+    # cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=pred, labels=Y))
+    cost = tf.nn.sigmoid_cross_entropy_with_logits(labels=Y, logits=pred)
     optimizer = tf.train.AdamOptimizer(learning_rate).minimize(cost)
 
     # Initializing global variables
@@ -93,7 +105,7 @@ if __name__ == '__main__':
             _, c = sess.run([optimizer, cost], feed_dict={X: x_train, Y: y_train})
             if (epoch + 1) % display_epochs == 0:
                 # a = 5
-                print("Epoch: ", (epoch + 1), " Cost: ", c)
+                print("Epoch: ", (epoch + 1))
         print("Optimization finished!")
 
         # Get train and test results and compare them to the expected values
