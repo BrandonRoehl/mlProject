@@ -91,8 +91,8 @@ if __name__ == '__main__':
     pred = model(X, weights, bias)
 
     # Define loss and optimizer
-    # cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=pred, labels=Y))
-    cost = tf.nn.sigmoid_cross_entropy_with_logits(labels=Y, logits=pred)
+
+    cost = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=pred, labels=Y))
     optimizer = tf.train.AdamOptimizer(learning_rate).minimize(cost)
 
     # Initializing global variables
