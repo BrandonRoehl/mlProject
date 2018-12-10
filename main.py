@@ -8,9 +8,9 @@ from tensorflow.keras.utils import to_categorical
 if __name__ == '__main__':
     # Hyper parameters
     learning_rate = .001
-    training_epochs = 2000
+    training_epochs = 5000
     display_epochs = 100
-    hidden_nodes = 72
+    hidden_nodes = 10
     data_type = 'float'
 
     # Read in the processed data
@@ -58,15 +58,11 @@ if __name__ == '__main__':
 
     weights = {
         "hidden": tf.Variable(tf.random_normal([n_input, hidden_nodes]), name="weight_hidden"),
-        "hidden2": tf.Variable(tf.random_normal([hidden_nodes, hidden_nodes]), name="weight_hidden2"),
-        "hidden3": tf.Variable(tf.random_normal([hidden_nodes, hidden_nodes]), name="weight_hidden3"),
         "output": tf.Variable(tf.random_normal([hidden_nodes, n_output]), name="weight_output")
     }
 
     bias = {
         "hidden": tf.Variable(tf.random_normal([hidden_nodes]), name="bias_hidden"),
-        "hidden2": tf.Variable(tf.random_normal([hidden_nodes]), name="bias_hidden2"),
-        "hidden3": tf.Variable(tf.random_normal([hidden_nodes]), name="bias_hidden3"),
         "output": tf.Variable(tf.random_normal([n_output]), name="bias_output")
     }
 
@@ -105,7 +101,7 @@ if __name__ == '__main__':
             _, c = sess.run([optimizer, cost], feed_dict={X: x_train, Y: y_train})
             if (epoch + 1) % display_epochs == 0:
                 # a = 5
-                print("Epoch: ", (epoch + 1))
+                print("Epoch: ", (epoch + 1), "Cost: ", c)
         print("Optimization finished!")
 
         # Get train and test results and compare them to the expected values
