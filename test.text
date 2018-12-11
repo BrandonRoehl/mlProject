@@ -1,0 +1,14 @@
+0:  age      : any number
+1:  sex      : [1,0]
+2:  cp       : [1,2,3,4]
+3:  trestbps : any number
+4:  chol     : any number
+5:  fbs      : [1,0]
+6:  restecg  : [0,1,2]
+7:  thalach  : any number
+8:  exang    : [0,1]
+9:  oldpeak  : any number
+10: slope    : [1,2,3]
+11: ca       : [0,1,2,3]
+12: thal     : [3,6,7]
+13: num      : [0,1]

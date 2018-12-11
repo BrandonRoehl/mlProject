@@ -13,7 +13,7 @@ if __name__ == '__main__':
     # Hyper parameters
     learning_rate = 0.001
     decay_rate = 0.0002
-    training_epochs = 3500
+    training_epochs = 335
     display_epochs = 100
     batch_size = 100
     hidden_nodes = 72
@@ -21,8 +21,8 @@ if __name__ == '__main__':
 
     # Read in the processed data
     patients = pd.read_csv('processed.cleveland.data', dtype='object', header=None, names=[
-        'age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'depression',
-        'exercise', 'ca', 'thal'
+        'age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'slope',
+        'ca', 'thal', 'num'
     ])
     # Sanitize based on incorrect data
     for x in patients.columns:
@@ -31,7 +31,7 @@ if __name__ == '__main__':
     # Convert to a float matrix
     patients = patients.astype(data_type)
     # Only train on patients with have or don't
-    patients = patients[patients.thal <= 1]
+    patients = patients[patients.num <= 1]
 
     print(patients.shape)
     # => (212 , 14)
@@ -39,16 +39,20 @@ if __name__ == '__main__':
     # => float64
 
     # Split into test and train data
-    x = patients.drop(['thal'], axis=1)
+    x = patients.drop(['num'], axis=1)
     y = patients.take([13], axis=1)
 
     # Normalize X data
     colT = ColumnTransformer(
         [("onehot", OneHotEncoder(categories=[[0, 1],
                                               [1, 2, 3, 4],
+                                              [0, 1],
                                               [0, 1, 2],
-                                              [1, 2, 3]]), [1, 2, 6, 10]),
-         ("norm", Normalizer(norm='l1'), [0, 3, 4, 5, 7, 8, 9, 11])])
+                                              [0, 1],
+                                              [1,2,3],
+                                              [0,1,2,3],
+                                              [3,6,7]]), [1,2,5,6,8,10,11,12]),
+         ("norm", Normalizer(norm='l1'), [0,3,4,7,9])])
 
     x = colT.fit_transform(x)
 
