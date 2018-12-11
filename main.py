@@ -11,9 +11,9 @@ from tensorflow.keras import activations
 
 if __name__ == '__main__':
     # Hyper parameters
-    learning_rate = 0.001
+    learning_rate = 0.0002
     decay_rate = 0.0002
-    training_epochs = 335
+    training_epochs = 2500
     display_epochs = 100
     batch_size = 100
     hidden_nodes = 72
